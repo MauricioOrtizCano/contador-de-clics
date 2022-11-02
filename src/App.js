@@ -1,23 +1,54 @@
-import logo from './logo.svg';
 import './App.css';
+import logo_rebel from './imagenes/Logo_Rebel.png';
+import fondo from './imagenes/Fondo.png';
+import Videofondo from './imagenes/VideoFondo.mp4';
+import Boton from './componentes/Boton';
+import Contador from './componentes/Contador';
+import { useState } from "react";
 
 function App() {
+
+  const [numClicks, setNumClicks] = useState(0); 
+
+  const clickControl = () => {
+    setNumClicks(numClicks + 1);
+  };
+
+  const resetCounter = () => {
+    setNumClicks(0);
+  };
+
+  
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <div className='video-wrapper'>
+        <video playsInline autoPlay muted loop poster={fondo}>
+          <source src={Videofondo} type='video/mp4' />
+        </video>
+      </div>
+      <div className='My-logo-container'>
+        <img 
+          className='My-logo'
+          src={logo_rebel}
+          alt="My logo RebelDevelop"
+        />
+      </div>
+      <div className='main-container'>
+        <Contador 
+          numClicks={numClicks}
+        />
+        <Boton 
+          text="Click" 
+          isClickButton={true}
+          clickControl={clickControl}
+        />
+        <Boton 
+          text="Reset"
+          isClickButton={false}
+          clickControl={resetCounter}
+        />
+      </div>
     </div>
   );
 }
